@@ -92,7 +92,6 @@ async function openPlaidLink(event: MouseEvent) {
   try {
     logger.debug('🔗 Initializing Plaid Link...')
     logger.debug('Environment:', import.meta.env.VITE_PLAID_ENV)
-    logger.debug('Client ID:', import.meta.env.VITE_PLAID_CLIENT_ID?.substring(0, 10) + '...')
     
     // Check authentication
     if (!authStore.user) {

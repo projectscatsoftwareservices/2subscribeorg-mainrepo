@@ -1,6 +1,6 @@
 import { initializeApp, FirebaseApp } from 'firebase/app'
 import { getAuth, Auth, RecaptchaVerifier } from 'firebase/auth'
-import { initializeFirestore, Firestore, persistentLocalCache, persistentMultipleTabManager } from 'firebase/firestore'
+import { initializeFirestore, Firestore, persistentLocalCache, persistentSingleTabManager, memoryLocalCache } from 'firebase/firestore'
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -28,9 +28,15 @@ export function initializeFirebase(): void {
   
   app = initializeApp(firebaseConfig)
   auth = getAuth(app)
-  firestore = initializeFirestore(app, {
-    localCache: persistentLocalCache({ tabManager: persistentMultipleTabManager() }),
-  })
+  // persistentMultipleTabManager requires SharedWorker which Android WebView doesn't support.
+  // Use single-tab persistent cache on mobile, memory cache as fallback.
+  try {
+    firestore = initializeFirestore(app, {
+      localCache: persistentLocalCache({ tabManager: persistentSingleTabManager({}) }),
+    })
+  } catch {
+    firestore = initializeFirestore(app, { localCache: memoryLocalCache() })
+  }
 }
 
 /**

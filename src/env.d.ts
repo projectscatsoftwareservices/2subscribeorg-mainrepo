@@ -16,8 +16,8 @@ interface ImportMetaEnv {
 
   readonly VITE_USE_PLAID_BACKEND?: 'true' | 'false'
   readonly VITE_PLAID_ENV?: string
-  readonly VITE_PLAID_CLIENT_ID?: string
-  readonly VITE_PLAID_SECRET?: string
+  // VITE_PLAID_CLIENT_ID and VITE_PLAID_SECRET must never appear here —
+  // Plaid credentials are backend-only and must not be bundled into client JS.
 
   readonly VITE_REQUIRE_EMAIL_VERIFICATION?: 'true' | 'false'
   readonly VITE_APP_VERSION?: string

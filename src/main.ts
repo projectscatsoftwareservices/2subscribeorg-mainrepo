@@ -19,8 +19,12 @@ app.use(router)
 
 // Bootstrap application (initializes Firebase if needed)
 ;(async () => {
-  await bootstrapApp()
-  
+  try {
+    await bootstrapApp()
+  } catch (error) {
+    console.error('Bootstrap failed, mounting app anyway:', error)
+  }
+
   // Initialize storage migration for PII protection
   try {
     await initializeStorageMigration()
@@ -33,7 +37,7 @@ app.use(router)
       await billingService.refreshSubscriptionStatus()
     }
   })
-  
+
   app.mount('#app')
 })()
 

@@ -201,7 +201,7 @@ export function useSubscriptionFeedback() {
         // Create the actual subscription with selected category - following the same pattern as Transactions.vue
         const newSubscription: Subscription = {
           id: crypto.randomUUID(),
-          userId: user.value?.id || 'unknown',
+          userId: user.value!.id,
           merchantName: params.merchantName,
           amount: {
             amount: params.amount.amount,

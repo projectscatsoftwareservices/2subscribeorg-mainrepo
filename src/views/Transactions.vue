@@ -155,7 +155,7 @@ async function handleCategorySelected(categoryId: string) {
       categoryId: categoryId,
       status: 'active' as const,
       source: 'manual' as const,
-      userId: authStore.userId || '',
+      userId: authStore.userId!,
       plaidTransactionIds: [selectedTransaction.value.id],
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString()
@@ -253,7 +253,7 @@ async function handleCreateCategoryAndConfirm(categoryData: { name: string; colo
       categoryId: newCategory.id,
       status: 'active' as const,
       source: 'manual' as const,
-      userId: authStore.userId || '',
+      userId: authStore.userId!,
       plaidTransactionIds: [transactionToProcess.id],
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString()

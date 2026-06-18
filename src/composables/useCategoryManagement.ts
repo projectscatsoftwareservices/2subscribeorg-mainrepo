@@ -34,7 +34,7 @@ export function useCategoryManagement() {
         id: crypto.randomUUID(),
         name: validatedData.name,
         colour: validatedData.colour,
-        userId: authStore.userId || 'unknown',
+        userId: authStore.userId!,
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString()
       }

@@ -39,7 +39,7 @@ export function useSubscriptionCreation() {
       
       const newSubscription: Subscription = {
         id: crypto.randomUUID(),
-        userId: authStore.userId || 'unknown',
+        userId: authStore.userId!,
         categoryId: categoryId,
         merchantName: transaction.merchantName,
         amount: transaction.amount,
